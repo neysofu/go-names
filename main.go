@@ -21,6 +21,10 @@ const mailgunDomain = "mg.neysofu.me"
 const cooloffPeriod = 4 * time.Second
 
 func main() {
+	// Pretend we're running a web service so render.com doesn't kill us
+	port := os.Getenv("PORT")
+	go http.ListenAndServe(":"+port, nil)
+
 	mailgunApiKey := os.Getenv("MAILGUN_API_KEY")
 	fmt.Println("Mailgun API Key: ", mailgunApiKey[:4], "...")
 	numSeenNames := 3

@@ -18,7 +18,7 @@ const emailSender = "filippo@mg.neysofu.me"
 const emailRecipient = "filippo@neysofu.me"
 const mailgunDomain = "mg.neysofu.me"
 
-const cooloffPeriod = 4 * time.Second
+const cooloffPeriod = 60 * time.Second
 
 func main() {
 	// Pretend we're running a web service so render.com doesn't kill us

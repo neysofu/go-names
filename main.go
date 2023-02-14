@@ -20,6 +20,9 @@ const mailgunDomain = "mg.neysofu.me"
 
 const cooloffPeriod = 60 * time.Second
 
+// TODO to ship this:
+// - add the real recipient email (but also keep mine for testing)
+// - bring down the cooloff to 4s
 func main() {
 	// Pretend we're running a web service so render.com doesn't kill us
 	port := os.Getenv("PORT")
@@ -27,7 +30,7 @@ func main() {
 
 	mailgunApiKey := os.Getenv("MAILGUN_API_KEY")
 	fmt.Println("Mailgun API Key: ", mailgunApiKey[:4], "...")
-	numSeenNames := 3
+	numSeenNames := 4
 
 	for {
 		names, _ := findPeopleNames(urlToMonitor)

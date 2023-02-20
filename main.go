@@ -16,11 +16,8 @@ import (
 const urlToMonitor = "https://sites.google.com/view/bigdatafelician/website-monitoring"
 
 const emailSender = "filippo@mg.neysofu.me"
-const emailRecipient = "filippo@neysofu.me"
 const mailgunDomain = "mg.neysofu.me"
 
-// TODO to ship this:
-// - add the real recipient email (but also keep mine for testing)
 func main() {
 	// Pretend we're running a web service so render.com doesn't kill us
 	port := os.Getenv("PORT")
@@ -28,7 +25,7 @@ func main() {
 
 	mailgunApiKey := os.Getenv("MAILGUN_API_KEY")
 	fmt.Println("Mailgun API Key: ", mailgunApiKey[:4], "...")
-	numSeenNames := 0
+	numSeenNames := 4
 
 	for {
 		names, _ := findPeopleNames(urlToMonitor)
@@ -36,7 +33,8 @@ func main() {
 
 		for _, name := range names[numSeenNames:] {
 			fmt.Println("Found a new name: ", name)
-			go sendEmail(mailgunApiKey, name)
+			go sendEmail(mailgunApiKey, name, "filippo@neysofu.me")
+			go sendEmail(mailgunApiKey, name, "leonardo.felician@outlook.it")
 		}
 		numSeenNames = len(names)
 
@@ -71,12 +69,12 @@ func findPeopleNames(url string) ([]string, error) {
 	return names, nil
 }
 
-func sendEmail(mailgunApiKey string, subject string) {
+func sendEmail(mailgunApiKey string, subject string, recipient string) {
 	mg := mailgun.NewMailgun(mailgunDomain, mailgunApiKey)
 	body := "Hello from Mailgun Go!"
 
 	// The message object allows you to add attachments and Bcc recipients
-	message := mg.NewMessage(emailSender, subject, body, emailRecipient)
+	message := mg.NewMessage(emailSender, subject, body, recipient)
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()

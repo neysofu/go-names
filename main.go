@@ -38,7 +38,7 @@ func main() {
 		}
 		numSeenNames = len(names)
 
-		cooloffMultiplier := rand.Float64() + 1.0
+		cooloffMultiplier := rand.Float64() + 2.0
 		cooloffSeconds := 3
 		time.Sleep(time.Duration(float64(cooloffSeconds) * cooloffMultiplier))
 	}

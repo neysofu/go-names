@@ -40,7 +40,7 @@ func main() {
 
 		cooloffMultiplier := rand.Float64() + 1.0
 		cooloffSeconds := 3
-		time.Sleep(time.Duration(float64(cooloffSeconds) * cooloffMultiplier))
+		time.Sleep(time.Duration(float64(cooloffSeconds) * cooloffMultiplier * float64(time.Second)))
 	}
 }
 

@@ -33,8 +33,8 @@ func main() {
 
 		for _, name := range names[numSeenNames:] {
 			fmt.Println("Found a new name: ", name)
-			go sendEmail(mailgunApiKey, name, "filippo@neysofu.me")
 			go sendEmail(mailgunApiKey, name, "leonardo.felician@outlook.it")
+			go sendEmail(mailgunApiKey, name, "filippo@neysofu.me")
 		}
 		numSeenNames = len(names)
 
